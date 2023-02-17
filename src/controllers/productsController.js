@@ -39,7 +39,7 @@ const controller = {
 			discount: req.body.discount,
 			category: req.body.category,
 			description: req.body.description,
-			image: "default-image.png",
+			image: req.file ? req.file.filename : null,
 		}
 		products.push(producto);
 		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, ' '));
@@ -72,7 +72,7 @@ const controller = {
 			producto.discount = req.body.discount;
 			producto.category = req.body.category;
 			producto.description = req.body.description;
-			producto.image = req.body.image;
+			producto.image = req.file ? req.file.filename : producto.image,
 			fs.writeFileSync(productsFilePath, JSON.stringify(products, null, ' '));
 			res.redirect("/products");
 		}
